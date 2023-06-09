@@ -245,7 +245,7 @@ const questionsWithPoints = [
         questionsWithPoints.forEach((item, index) => {
             const div = document.createElement('div');
             div.className = 'question';
-            div.innerHTML = `<p>${index + 1} : ${item.question}</p>`;
+            div.innerHTML = `<p>${index + 1} : ${item.question} (${item.points} punten per antwoord)</p>`;
             
             item.answer.forEach((answer) => {
             div.innerHTML += `<input type="checkbox" data-points="${item.points}"> <label for="question${index}">${answer}</label><br/>`;
