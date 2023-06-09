@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ouwe Zak Test</title>
+    <style>
+        body {
+            font-family: Poppins, Arial, sans-serif;
+        }
+        .question {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Ouwe Zak Test</h1>
+    <p>
+    	Bron: <a href="https://www.nrc.nl/nieuws/2023/06/05/wanneer-ben-je-officieel-een-ouwe-zak-doe-de-test-a4166378">Japke-d. denkt mee<a/>
+    </p>
+    <div id="questions"></div>
+    <p id="score"></p>
+    <p id="result"></p>
+
+    <script>
+const questionsWithPoints = [
+    {
+    	question: "Je snapt dat je een column met zelfspot moet lezen, en nooit 100 procent op jezelf moet betrekken.",
+    	answer: [
+      	"Ik lees een column zonder zelfspot", 
+        "Ik betrek een column 100% op mijzelf.",
+      ], 
+      points: 10
+    },
+    {
+    	question: "Je begint een mail met L.S. en sluit af met ‘hoogachtend’.",
+    	answer: [
+      	"Ik begin een mail met L.S.", 
+        "Ik sluit een mail af met ‘hoogachtend’.",
+      ], 
+      points: 5
+    },    
+    {
+    	question: "Je gebruikt geregeld uitdrukkingen als ‘verdomd’, ‘op den twit’, ‘op de bonnefooi’, en ‘in de echtelijke sponde’. 5 punten voor elke ja.",
+    	answer: [
+      	"verdomd", 
+        "op den twit",
+        "op de bonnefooi",
+        "in de echtelijke sponde",
+      ], 
+      points: 5
+    },        
+    {
+    	question: "Je zit nog op Twitter.",
+    	answer: [
+      	"Ja.",
+      ], 
+      points: 10
+    },  
+    {
+    	question: "Je vindt dat niemand, en scholieren al helemaal niet, een elektrische fiets hoort te hebben, behalve jijzelf.",
+    	answer: [
+      	"Niemand hoort een electrische fiets te hebben.",
+        "Scholieren horen al helemaal niet een electrische fiets te hebben.",
+        "Ik ben de enige die een electrische fiets hoort te hebben."
+      ], 
+      points: 5
+    },      
+    {
+     	question: "Elk appje komt met een luide ‘dzjing’ binnen omdat je niet weet dat het geluid uit kan.",
+    	answer: [
+      	"Ik app met gestrekte wijsvinger.",
+        "Ik hou telefoon tegen mijn oor in plaats van als een cracker voor mijn gezicht.",
+        "Ik schrijf ‘op de WhatsApp’ nog punten en hoofdletters.",
+        "Ik zeg ‘smartphone’ of ‘mobiele telefoon’ in plaats van ‘telefoon‘",
+      ], 
+      points: 3
+    },   
+    {
+    	question: "Je hebt moeite met ‘woke’ en vraagt voortdurend wat dat is.",
+    	answer: [
+      	"Ik heb moeite met ‘woke’.",
+        "Ik vraag voortdurend wat ‘woke’ is.",
+      ], 
+      points: 10
+    },       
+    {
+     	question: "Je vindt dat ze vroeger mooiere auto’s ontwierpen (is wel zo).",
+    	answer: [
+      	"Vroeger ontwierpen ze mooiere auto's",
+      ], 
+      points: 5
+    },    
+    {
+     	question: "Je weet wie of wat Ted de Braak is",
+    	answer: [
+      	"Ik weet wie of wat Martin Brozius is.",
+        "Ik weet wie of wat Willem Ruis is.",
+        "Ik weet wie of wat Ria Bremer is.",
+        "Ik weet wie of wat de <i>Wie-kent-kwis</i> is.",
+        "Ik weet wie of wat <i>Ren je Rot</i> is.",
+        "Ik weet wie of wat <i>Stuif es in</i> is.",
+        "Ik vertel heel graag over bovenstaande aan collega's die dat liever niet hebben."
+      ], 
+      points: 5
+    },    
+    {
+     	question: "Als je bij het reserveren in een restaurant om een rustig tafeltje vraagt.",
+    	answer: [
+      	"Ja."
+      ], 
+      points: 10
+    },  
+    {
+     	question: "Als je zegt: ‘ik móét’, in plaats van ‘ik mág nog 14 jaar werken’. Als collega’s aan je vragen hoelang je nog moet.",
+    	answer: [
+      	"Ik móét nog jaren werken."
+      ], 
+      points: 10
+    },     
+    {
+     	question: "Als je zegt ‘op het werk’ of ‘op m’n werk’ in plaats van ‘op werk’.",
+    	answer: [
+      	"Ik zeg ‘op het werk’ of ‘op m’n werk’."
+      ], 
+      points: 10
+    },   
+	{
+     	question: "Fietstassen, middagslaapje, telefoon met klaphoesje, boodschappenbriefje op papier.",
+    	answer: [
+      	"Ik heb fietstassen",
+		"Ik doe een middagslaapje",
+		"Ik heb een telefoon met klaphoesje",
+		"Ik maak boodschappenbriefjes op papier",
+      ], 
+      points: 5
+    },  
+	{
+     	question: "Als je mensen verbetert (hoofdsteden, spelfouten, grammatica).",
+    	answer: [
+      	"Ik zeg geregeld dat ‘beseffen’ geen wederkerend werkwoord is.",
+		"Ik verbeter mensen als ze de verkeerde hoofdstad gebruiken",
+		"Ik verbeter mensen als ze spelfouten maken.",
+		"Ik verbeter mensen als ze grammatica fouten maken",
+      ], 
+      points: 5
+    },  
+	{
+     	question: "Als je alles omrekent in guldens.",
+    	answer: [
+      	"Ik reken alles om in guldens.",
+		"Ik zeg de uitkomst hardop waar anderen bij zijn",
+      ], 
+      points: 5
+    },  	
+	{
+     	question: "Als je enthousiast herinneringen gaat ophalen aan de hand van het geboortejaar van de stagiair.",
+    	answer: [
+      	"Ik vraagt aan die jonge collega de band op z’n shirt ook wel eens in het echt gezien heeft.",
+		"Ik ga los over Pinkpop 1996 tegen die jonge collega.",
+      ], 
+      points: 5
+    },  	
+	{
+     	question: "Als je ontroerd raakt als mensen elkaar enthousiast begroeten op vliegvelden en stations.",
+    	answer: [
+      	"Ik raak ontroerd door huisdieren.",
+		"Ik glimlach naar ouders met kinderen.",
+		"Ik maak een praatje met de kassamedewerker.",
+		"Ik reken überhaupt nog af bij een kassa.",
+      ], 
+      points: 5
+    }, 
+	{
+     	question: "Als je voor heel veel dingen op je scherm een jongere collega nodig hebt (letters groter, fullscreen, geluid, camera, etc.).",
+    	answer: [
+      	"Ik ben practisch digibeet.",
+      ], 
+      points: 10
+    },  
+	{
+     	question: "Als je klaagt dat de kooktijd op verpakkingen GROOT GEDRUKT zou moeten worden in plaats van in het midden van de gebruiksaanwijzing (maar echt!).",
+    	answer: [
+      	"Ik kan de kooktijd op verpakkingen niet goed vinden en dat ligt niet aan mij.",
+      ], 
+      points: 5
+    }, 
+	{
+     	question: "Als je dingen zegt als: ‘wat hebben we het goed samen’.",
+		answer: [
+      	"Ik zeg wel eens ‘Zo, ik zit’.",
+		"Ik zeg wel eens ‘wat hebben we geboft met het weer’.",
+		"Ik zeg wel eens ‘wat wonen we toch in een mooi land’.", 
+      ], 
+      points: 10
+    },
+	{
+     	question: "Als je denkt dat 1980 twintig jaar geleden is.",
+		answer: [
+      	"Ik denk dat 1980 twintig jaar geleden is.",
+		"Ik weet moet dat er tussen nu en mijn geboortejaar evenveel tijd zit als tussen mijn geboortejaar en 1917.",
+      ], 
+      points: 5
+    },
+	{
+     	question: "Als het eindelijk weer eens regent en jij zegt: ‘goed voor de tuin’.",
+		answer: [
+      	"Ik zeg ‘goed voor de tuin’ als het eindelijk weer eens regent.",
+      ], 
+      points: 10
+    }, 
+	{
+     	question: "Als je de bladen van de ANWB, Eigen Huis, en het ABP leest.",
+		answer: [
+      	"Ik lees het ANWB blaadje.",
+		"Ik lees het blad van Eigen Huis.",
+		"Ik lees het blad van het ABP.",
+      ], 
+      points: 20
+    },  	
+	{
+     	question: "Als je bij elk verhaal dat iemand vertelt een soortgelijk verhaal hebt.",
+		answer: [
+      	"Ik heb bij elk verhaal wat iemand vetelt een soortgelijk verhaal.",
+		"Ik ga dat verhaal ook spuien.",
+      ], 
+      points: 10
+    },   	
+	{
+     	question: "Als je je mails uitprint want ‘dat leest lekkerder’.",
+		answer: [
+      	"Ik print emails uit. Dat leest namelijk lekkerder.",
+      ], 
+      points: 90
+    }, 	
+];
+
+
+        const resultCategories = [
+            {name: "Je bent een jonge god. Succes met je studie! Let een beetje op de oudjes om je heen en ga eens een borrel met ze drinken: ze weten verrassend veel en hebben alle zaken waar jij mee worstelt allemaal al eens meegemaakt.", threshold: 0},
+            {name: "Je bent een ouwe zak in het lichaam van een jonge god – waarschijnlijk een millennial. Je tobt te veel. Probeer af en toe eens wat zelfspot. Hou vol! We houden van je.", threshold: 25},
+            {name: "Je bent een ouwe zak, maar hebt dat niet door. Geeft niks, want iedereen bewondert je (aanpassingsvermogen).", threshold: 200},
+            {name: "Gefeliciteerd! Je bent officieel een ouwe zak. Je bent milder geworden, neemt jezelf niet zo serieus, je kan het leven en de wereld relativeren en bent een rots in de branding voor je jongere collega’s. Vraag weleens wat vaker aan de jongeren hoe het gaat, en wat ze doen. Dus zendmodus uit en luistermodus aan. Voor iedereen leuk", threshold: 300}
+        ];
+
+        const questionContainer = document.getElementById('questions');
+        questionsWithPoints.forEach((item, index) => {
+            const div = document.createElement('div');
+            div.className = 'question';
+            div.innerHTML = `<p>${index + 1} : ${item.question}</p>`;
+            
+            item.answer.forEach((answer) => {
+            div.innerHTML += `<input type="checkbox" data-points="${item.points}"> <label for="question${index}">${answer}</label><br/>`;
+            });
+            
+
+            questionContainer.appendChild(div);
+        });
+
+        let scoreDisplay = document.getElementById('score');
+        let resultDisplay = document.getElementById('result');
+
+        function computeScore() {
+            let score = 0;
+            const checkboxes = Array.from(document.querySelectorAll("input[type='checkbox']"));
+            checkboxes.forEach((checkbox, index) => {
+                if (checkbox.checked) {
+                    score += parseInt(checkbox.dataset.points);
+                }
+            });
+
+            let resultCategory;
+            for (let i = 0; i < resultCategories.length; i++) {
+                if (score < resultCategories[i].threshold) {
+                    break;
+                }
+                resultCategory = resultCategories[i];
+            }
+
+            scoreDisplay.textContent = `Score: ${score}`;
+            resultDisplay.textContent = `Classification: ${resultCategory.name}`;
+        }
+
+        document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener('change', computeScore);
+        });
+
+        computeScore();
+    </script>
+</body>
+</html>
